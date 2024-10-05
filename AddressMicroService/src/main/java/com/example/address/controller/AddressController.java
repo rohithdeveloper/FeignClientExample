@@ -21,7 +21,7 @@ public class AddressController {
 	private AddressService addService;
 
 	@PostMapping("/address")
-	public AddressDto addUser(@RequestBody AddressDto addressDto) {
+	public AddressDto addAddress(@RequestBody AddressDto addressDto) {
 		return addService.createAddress(addressDto);
 
 	}
