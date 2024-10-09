@@ -17,6 +17,8 @@ public class AddressServiceImpl implements AddressService {
 
 	@Autowired
 	private AddressRepository addRepo;
+	
+	private static final Logger logger=LoggerFactory.getLogger(AddressServiceImpl.class);
 
 	@Override
 	public AddressDto createAddress(AddressDto addressDto) {
@@ -25,16 +27,19 @@ public class AddressServiceImpl implements AddressService {
 		Address savedAddress = addRepo.save(address);
 
 		AddressDto addDto = UserMapper.mapToAddressDto(savedAddress);
+		logger.info("address is added with id -{}",addDto.getAddressId());
 		return addDto;
 	}
 
 	@Override
+	@Cacheable(cacheNames="Address",key="#id")
 	public AddressDto getAddressById(Long id) throws Exception {
 		// TODO Auto-generated method stub
 		Optional<Address> address = addRepo.findById(id);
 		if (address.isPresent()) {
 			// Map Employee to EmployeeDto
 			AddressDto addressDto = UserMapper.mapToAddressDto(address.get());
+			logger.info("fetch address from DB");
 			return addressDto;
 		} else {
 			// Throw exception if employee is not found
@@ -57,6 +62,7 @@ public class AddressServiceImpl implements AddressService {
 		if (address.isPresent()) {
 			// Map Employee to EmployeeDto
 			List<AddressDto> addressDto = UserMapper.mapToAddressDto(address.get());
+			logger.info("fetch all address with empId from DB");
 			return addressDto;
 		} else {
 			// Throw exception if employee is not found
@@ -64,5 +70,8 @@ public class AddressServiceImpl implements AddressService {
 		}
 
 	}
+
+	// for update with id use " @CachePut(cacheNames="Address",key="#id") "
+	// for delete with id use " @CacheEvict(cacheNames="Address",key="#id") "
 
 }
