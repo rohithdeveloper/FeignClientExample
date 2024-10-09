@@ -14,13 +14,13 @@ import com.example.address.dto.AddressDto;
 import com.example.address.service.AddressService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/address")
 public class AddressController {
 
 	@Autowired
 	private AddressService addService;
 
-	@PostMapping("/address")
+	@PostMapping("/addAddress")
 	public AddressDto addAddress(@RequestBody AddressDto addressDto) {
 		return addService.createAddress(addressDto);
 
