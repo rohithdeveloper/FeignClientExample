@@ -14,13 +14,13 @@ import com.example.employee.dto.EmployeeDto;
 import com.example.employee.service.EmployeeService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/employee")
 public class EmployeeController {
 
 	@Autowired
 	private EmployeeService empService;
 
-	@PostMapping("/employees")
+	@PostMapping("/addEmployees")
 	public EmployeeDto addUser(@RequestBody EmployeeDto empDto) {
 		return empService.createEmployee(empDto);
 
