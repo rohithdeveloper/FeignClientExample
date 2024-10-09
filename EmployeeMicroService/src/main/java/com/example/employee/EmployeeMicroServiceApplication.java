@@ -10,6 +10,7 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableFeignClients
+@EnableCaching
 public class EmployeeMicroServiceApplication {
 
 	public static void main(String[] args) {
