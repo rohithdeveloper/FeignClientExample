@@ -50,27 +50,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 
-	// Rest Template 
-
-//	@Override
-//	public EmployeeDto getEmployeeById(long id) throws Exception {
-//		// TODO Auto-generated method stub
-//		Optional<Employee> employee=empRepo.findById(id);
-//		if(employee.isPresent()) {
-//			EmployeeDto empDto = UserMapper.mapToEmployeeDto(employee.get());
-//			//http://localhost:8081/api/employee/252
-//			ArrayList<Address> forObject=restTemplate.getForObject("http://localhost:8081/api/employee/"+empDto.getEmpId(), ArrayList.class);
-//			logger.info("{}", forObject);
-//			empDto.setAddresses(forObject);
-//			return empDto;
-//		}else {
-//			throw new Exception("Employee not found");
-//		}
-//		
-//		
-//	}
-
-
+	// Feignclient 
 	@Override
 	public EmployeeDto getEmployeeById(long id) throws Exception {
 		// TODO Auto-generated method stub
@@ -89,18 +69,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		
 	}
 
-//	@Override
-//	public EmployeeDto getEmployeeById(long id) throws Exception {
-//		// TODO Auto-generated method stub
-//		Optional<Employee> employee = empRepo.findById(id);
-//		if (employee.isPresent()) {
-//			EmployeeDto empDto = UserMapper.mapToEmployeeDto(employee.get());
-//			return empDto;
-//		}else {
-//			throw new Exception("Employee not found");
-//		}
-//	}
-	
+
 }
 
 
