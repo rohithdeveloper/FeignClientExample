@@ -10,7 +10,7 @@ import com.example.employee.dto.AddressDto;
 
 
 
-@FeignClient(name = "ADDRESS-MICROSERVICE",url = "http://localhost:8081/api")
+@FeignClient(name = "ADDRESS-MICROSERVICE",url = "http://localhost:8081/address")
 public interface AddressClient {
 
 	@GetMapping("/employee/{empId}")
