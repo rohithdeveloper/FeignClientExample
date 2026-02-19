@@ -1,0 +1,43 @@
+✅ What is Feign Client?
+Feign Client is a declarative HTTP client in Spring Boot used to call another microservice.
+
+👉 Instead of writing RestTemplate or WebClient code manually, you just define an interface, and Feign automatically makes the HTTP call.
+
+🔹 Problem Without Feign
+Normally to call another service:
+  RestTemplate restTemplate = new RestTemplate();
+  String response = restTemplate.getForObject(
+      "http://localhost:8081/users/1", 
+      String.class
+  );
+You must:
+Create URL
+Handle headers
+Handle errors
+Manage response mapping
+Too much boilerplate 😓
+
+
+With Feign Client (Very Simple)
+You just write an interface like this:
+  @FeignClient(name = "user-service", url = "http://localhost:8081")
+  public interface UserClient {
+  
+      @GetMapping("/users/{id}")
+      User getUserById(@PathVariable("id") Long id);
+  }
+That's it ✅
+Feign will automatically:
+Create HTTP call
+Map JSON to Object
+Handle serialization
+
+for Example:
+Suppose:
+🟢 User Service runs on port 8081
+🔵 Order Service runs on port 8082
+Order Service needs user details before placing an order
+Instead of writing HTTP logic manually using RestTemplate, we used Feign Client, which is provided by Spring Cloud.
+
+
+
