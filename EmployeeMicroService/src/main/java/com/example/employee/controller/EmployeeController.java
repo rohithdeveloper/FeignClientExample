@@ -31,8 +31,13 @@ public class EmployeeController {
 		return empService.getEmployeeById(empId);
 	}
 	
-	@GetMapping("allEmployes")
+	@GetMapping("/allEmployes")
 	public List<EmployeeDto> getAllEmployees(){
 		return empService.getAllEmployees();
+	}
+	
+	@GetMapping("/getAllDetails")
+	public List<EmployeeDto> getAllDetails(){
+		return empService.getAllEmployeesWithAddresses();
 	}
 }

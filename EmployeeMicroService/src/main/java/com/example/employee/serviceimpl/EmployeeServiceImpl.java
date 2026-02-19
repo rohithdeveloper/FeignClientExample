@@ -1,13 +1,14 @@
 package com.example.employee.serviceimpl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import com.example.employee.client.AddressClient;
 import com.example.employee.dto.AddressDto;
@@ -44,6 +45,36 @@ public class EmployeeServiceImpl implements EmployeeService {
 		logger.info("fetch all employees from DB");
 		return employeesDto;
 	}
+	
+	
+	
+	@Override
+	public List<EmployeeDto> getAllEmployeesWithAddresses() {
+
+	    List<Employee> employees = empRepo.findAll();
+
+	    List<EmployeeDto> employeeDtoList = new ArrayList<>();
+
+	    for (Employee emp : employees) {
+
+	        // Mapping Employee to EmployeeDto
+	        EmployeeDto empDto = UserMapper.mapToEmployeeDto(emp);
+
+	        // Fetch addresses using Feign
+	        List<AddressDto> addresses =
+	                addressClient.getAddressByEmployeeId(empDto.getEmpId());
+
+	        // Set addresses to DTO
+	        empDto.setAddresses(addresses);
+
+	        // Add to final list
+	        employeeDtoList.add(empDto);
+	        logger.info("all employees with addresses");
+	    }
+
+	    return employeeDtoList;
+	}
+
 
 	// Feign Client
 
@@ -64,6 +95,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 			throw new Exception("Employee not found");
 		}
 	}
+
+	
+	
+	
 }
 
 
